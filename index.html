@@ -52,10 +52,10 @@
         /* Falling star animation */
         @keyframes fall {
             0% {
-                transform: translateY(-100vh) translateX(calc(100vw * 0.2)); /* Start above the screen */
+                transform: translateY(-100vh) translateX(calc(100vw * -0.5)); /* Start above the screen with random horizontal movement */
             }
             100% {
-                transform: translateY(100vh) translateX(calc(100vw * 0.2)); /* End below the screen */
+                transform: translateY(100vh) translateX(calc(100vw * 0.5)); /* Fall to the bottom with random horizontal movement */
             }
         }
 
