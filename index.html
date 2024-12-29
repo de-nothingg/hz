@@ -33,7 +33,7 @@
             height: 3px;
             background: rgba(128, 0, 128, 0.8); /* Initial color */
             border-radius: 50%;
-            animation: twinkle 2s infinite ease-in-out, moveStar 15s infinite linear;
+            animation: twinkle 2s infinite ease-in-out, fall 10s infinite linear;
         }
 
         /* Star twinkling animation */
@@ -49,13 +49,13 @@
             }
         }
 
-        /* Star movement animation */
-        @keyframes moveStar {
+        /* Falling star animation */
+        @keyframes fall {
             0% {
-                transform: translateX(0) translateY(0);
+                transform: translateY(-100vh) translateX(calc(100vw * 0.2)); /* Start above the screen */
             }
             100% {
-                transform: translateX(calc(100vw * 2)) translateY(calc(100vh * 2));
+                transform: translateY(100vh) translateX(calc(100vw * 0.2)); /* End below the screen */
             }
         }
 
