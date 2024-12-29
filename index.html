@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Violetrix</title>
+    <!-- Adding Google Font for Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
         body {
@@ -13,7 +16,7 @@
             background: black;
         }
 
-        /* Фон зі зірками */
+        /* Star background */
         .stars {
             position: fixed;
             width: 100%;
@@ -28,24 +31,35 @@
             position: absolute;
             width: 3px;
             height: 3px;
-            background: rgba(128, 0, 128, 0.8); /* Початковий колір */
+            background: rgba(128, 0, 128, 0.8); /* Initial color */
             border-radius: 50%;
-            animation: twinkle 2s infinite ease-in-out;
+            animation: twinkle 2s infinite ease-in-out, moveStar 15s infinite linear;
         }
 
-        /* Анімація для зірок */
+        /* Star twinkling animation */
         @keyframes twinkle {
             0%, 100% {
                 opacity: 0;
                 transform: scale(0.5);
             }
+
             50% {
                 opacity: 1;
                 transform: scale(1.2);
             }
         }
 
-        /* Зменшення сяяння тексту */
+        /* Star movement animation */
+        @keyframes moveStar {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            100% {
+                transform: translateX(calc(100vw * 2)) translateY(calc(100vh * 2));
+            }
+        }
+
+        /* Text glow */
         .text {
             position: absolute;
             top: 50%;
@@ -55,7 +69,7 @@
             font-size: 4rem;
             text-shadow: 0 0 10px #a079c7, 0 0 20px #a079c7;
             opacity: 0;
-            animation: fadeIn 1s ease-out forwards, moveUp 3s ease-out 1s forwards; /* Плавне підняття з відтермінуванням */
+            animation: fadeIn 1s ease-out forwards, moveUp 3s ease-out 1s forwards;
         }
 
         @keyframes fadeIn {
@@ -63,6 +77,7 @@
                 opacity: 0;
                 transform: translate(-50%, -50%) scale(0.8);
             }
+
             100% {
                 opacity: 1;
                 transform: translate(-50%, -50%) scale(1);
@@ -73,12 +88,13 @@
             0% {
                 transform: translate(-50%, -50%);
             }
+
             100% {
-                transform: translate(-50%, -120%); /* Текст піднімається на більшу відстань */
+                transform: translate(-50%, -120%);
             }
         }
 
-        /* Стилі для кнопок */
+        /* Button styles */
         .buttons {
             position: absolute;
             top: 50%;
@@ -110,9 +126,15 @@
         }
     </style>
 </head>
+
 <body>
+    <!-- Star background -->
     <div class="stars"></div>
+
+    <!-- Main text -->
     <div class="text" id="main-text">Violetrix</div>
+
+    <!-- Buttons -->
     <div class="buttons" id="buttons-container">
         <button class="btn">Test 1</button>
         <button class="btn">Test 2</button>
@@ -121,13 +143,13 @@
     </div>
 
     <script>
-        // Генерація зірок
+        // Star generation
         const starsContainer = document.querySelector('.stars');
         const numStars = 100;
 
         function randomColor() {
-            // Генерація випадкового кольору для зірок (світліший або темніший)
-            const baseColors = ['#9b59b6', '#8e44ad', '#bb8fce', '#af7ac5', '#a569bd']; 
+            // Generate random color for stars (lighter or darker)
+            const baseColors = ['#9b59b6', '#8e44ad', '#bb8fce', '#af7ac5', '#a569bd'];
             return baseColors[Math.floor(Math.random() * baseColors.length)];
         }
 
@@ -143,7 +165,7 @@
             star.style.top = `${y}px`;
             star.style.animationDelay = `${delay}s`;
             star.style.animationDuration = `${duration}s`;
-            star.style.backgroundColor = randomColor();  // Задаємо випадковий колір
+            star.style.backgroundColor = randomColor();  // Set random color
 
             starsContainer.appendChild(star);
         }
@@ -151,16 +173,17 @@
         const text = document.getElementById('main-text');
         const buttonsContainer = document.getElementById('buttons-container');
 
-        // Анімація тексту
+        // Text animation
         setTimeout(() => {
             text.style.opacity = '1';
         }, 1000);
 
-        // Показ кнопок після завершення анімації підйому тексту
+        // Show buttons after text animation
         setTimeout(() => {
             buttonsContainer.style.opacity = '1';
             buttonsContainer.style.visibility = 'visible';
-        }, 4000); // Кнопки з'являться після 4 секунд (завершення анімації тексту)
+        }, 4000); // Buttons will appear after 4 seconds (after text animation completes)
     </script>
 </body>
+
 </html>
