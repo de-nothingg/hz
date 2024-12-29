@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Violetrix</title>
-    <!-- Adding Google Font for Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <style>
         body {
             margin: 0;
@@ -16,7 +13,6 @@
             background: black;
         }
 
-        /* Star background */
         .stars {
             position: fixed;
             width: 100%;
@@ -31,12 +27,11 @@
             position: absolute;
             width: 3px;
             height: 3px;
-            background: rgba(128, 0, 128, 0.8); /* Initial color */
+            background: rgba(128, 0, 128, 0.8);
             border-radius: 50%;
             animation: twinkle 2s infinite ease-in-out, fall 10s infinite linear;
         }
 
-        /* Star twinkling animation */
         @keyframes twinkle {
             0%, 100% {
                 opacity: 0;
@@ -49,17 +44,15 @@
             }
         }
 
-        /* Falling star animation */
         @keyframes fall {
             0% {
-                transform: translateY(-100vh) translateX(calc(100vw * -0.5)); /* Start above the screen with random horizontal movement */
+                transform: translateY(-100vh) translateX(calc(100vw * -0.5));
             }
             100% {
-                transform: translateY(100vh) translateX(calc(100vw * 0.5)); /* Fall to the bottom with random horizontal movement */
+                transform: translateY(100vh) translateX(calc(100vw * 0.5));
             }
         }
 
-        /* Text glow */
         .text {
             position: absolute;
             top: 50%;
@@ -94,22 +87,21 @@
             }
         }
 
-        /* Button styles */
         .buttons {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
-            gap: 20px;
+            gap: 40px;
             opacity: 0;
             visibility: hidden;
             transition: opacity 1s ease, visibility 1s ease;
         }
 
         .btn {
-            padding: 15px 30px;
-            font-size: 1.4rem;
+            padding: 20px 40px;
+            font-size: 2rem;
             color: white;
             background: linear-gradient(45deg, #6200ea, #b19cd9);
             border: none;
@@ -124,22 +116,18 @@
             background: linear-gradient(45deg, #b19cd9, #6a0dad);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
         }
+
     </style>
 </head>
 
 <body>
-    <!-- Star background -->
     <div class="stars"></div>
 
-    <!-- Main text -->
     <div class="text" id="main-text">Violetrix</div>
 
-    <!-- Buttons -->
     <div class="buttons" id="buttons-container">
-        <button class="btn">Test 1</button>
-        <button class="btn">Test 2</button>
-        <button class="btn">Test 3</button>
-        <button class="btn">Test 4</button>
+        <button class="btn" id="freeButton">Free</button>
+        <button class="btn" id="lifetimeButton">Lifetime</button>
     </div>
 
     <script>
@@ -148,7 +136,6 @@
         const numStars = 100;
 
         function randomColor() {
-            // Generate random color for stars (lighter or darker)
             const baseColors = ['#9b59b6', '#8e44ad', '#bb8fce', '#af7ac5', '#a569bd'];
             return baseColors[Math.floor(Math.random() * baseColors.length)];
         }
@@ -165,7 +152,7 @@
             star.style.top = `${y}px`;
             star.style.animationDelay = `${delay}s`;
             star.style.animationDuration = `${duration}s`;
-            star.style.backgroundColor = randomColor();  // Set random color
+            star.style.backgroundColor = randomColor();
 
             starsContainer.appendChild(star);
         }
@@ -178,12 +165,24 @@
             text.style.opacity = '1';
         }, 1000);
 
-        // Show buttons after text animation
         setTimeout(() => {
             buttonsContainer.style.opacity = '1';
             buttonsContainer.style.visibility = 'visible';
-        }, 4000); // Buttons will appear after 4 seconds (after text animation completes)
+        }, 4000); // Buttons will appear after text animation
+
+        // Handle Free button click
+        document.getElementById('freeButton').addEventListener('click', () => {
+            const freeTab = window.open('', '_blank');
+            freeTab.document.body.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; padding: 20px;">
+                    <button onclick="window.history.back()">Back</button>
+                </div>
+                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 3rem; color: white; font-family: 'Poppins', sans-serif;">
+                    NEMA FREE BLYAT
+                </div>
+            `;
+            freeTab.document.body.style.background = 'black'; // Set background color to match the original page
+        });
     </script>
 </body>
-
 </html>
