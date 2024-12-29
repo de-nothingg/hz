@@ -1,163 +1,207 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Violetrix</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Show Match Tournament</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            margin: 0;
+            background: radial-gradient(circle at top, #0d1b2a, #1b263b, #415a77);
+            color: white;
+            font-family: Arial, sans-serif;
             overflow: hidden;
-            font-family: 'Poppins', sans-serif;
-            background: black;
         }
-
-        /* Фон зі зірками */
-        .stars {
+        .snowflake {
             position: fixed;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            top: 0;
-            left: 0;
-            z-index: -1;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
         }
-
-        .star {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(128, 0, 128, 0.8); /* Початковий колір */
-            border-radius: 50%;
-            animation: twinkle 2s infinite ease-in-out;
-        }
-
-        /* Анімація для зірок */
-        @keyframes twinkle {
-            0%, 100% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.2);
-            }
-        }
-
-        /* Зменшення сяяння тексту */
-        .text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #a079c7;
-            font-size: 4rem;
-            text-shadow: 0 0 10px #a079c7, 0 0 20px #a079c7;
-            opacity: 0;
-            animation: fadeIn 1s ease-out forwards, moveUp 3s ease-out 1s forwards; /* Плавне підняття з відтермінуванням */
-        }
-
-        @keyframes fadeIn {
+        @keyframes fall {
             0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.8);
+                transform: translateY(-10px);
+                opacity: 1;
             }
             100% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
+                transform: translateY(100vh);
+                opacity: 0;
             }
         }
-
-        @keyframes moveUp {
-            to {
-                transform: translate(-50%, -60%);
-            }
-        }
-
-        /* Стилі для кнопок */
-        .buttons {
-            position: absolute;
-            top: 60%;
-            left: 50%;
-            transform: translate(-50%, -60%);
-            display: flex;
-            gap: 20px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 1s ease, visibility 1s ease;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            font-size: 1.4rem;
+        .tournament-header {
+            text-align: center;
+            margin-top: 20px;
             color: white;
-            background: linear-gradient(45deg, #6200ea, #b19cd9);
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, background 0.5s ease, box-shadow 0.3s ease;
         }
-
-        .btn:hover {
-            transform: scale(1.1);
-            background: linear-gradient(45deg, #b19cd9, #6a0dad);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        .tournament-bracket {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .registration-form, .participant-list {
+            margin: 20px auto;
+            max-width: 400px;
+            background-color: rgba(27, 38, 59, 0.85);
+            border: 1px solid #415a77;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card-body {
+            padding: 20px;
+            color: white;
+        }
+        .btn-primary {
+            background-color: #778da9;
+            border-color: #778da9;
+        }
+        .btn-primary:hover {
+            background-color: #506d8b;
+            border-color: #506d8b;
+        }
+        .list-group-item {
+            background-color: #1b263b;
+            color: white;
+            border: 1px solid #415a77;
+        }
+        .list-group-item.text-center {
+            color: white;
+        }
+        .bg-light {
+            background-color: #1b263b !important;
+            color: white;
+        }
+        .tournament-bracket h2 {
+            color: white;
         }
     </style>
 </head>
 <body>
-    <div class="stars"></div>
-    <div class="text" id="main-text">Violetrix</div>
-    <div class="buttons" id="buttons-container">
-        <button class="btn">Test 1</button>
-        <button class="btn">Test 2</button>
-        <button class="btn">Test 3</button>
-        <button class="btn">Test 4</button>
+    <div class="container">
+        <!-- Header -->
+        <header class="tournament-header">
+            <h1>Show Match Tournament</h1>
+            <p>Register to participate in exciting matches of CS2 or Dota!</p>
+        </header>
+
+        <!-- Registration Form -->
+        <section class="registration-form card">
+            <div class="card-body">
+                <h2 class="card-title text-center">Player Registration</h2>
+                <form id="registration-form">
+                    <div class="mb-3">
+                        <label for="nickname" class="form-label">Nickname</label>
+                        <input type="text" id="nickname" class="form-control" placeholder="Enter your nickname" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="game" class="form-label">Game</label>
+                        <select id="game" class="form-select" required>
+                            <option value="" disabled selected>Choose a game</option>
+                            <option value="cs2">Counter-Strike 2</option>
+                            <option value="dota">Dota 2</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="register-btn" class="btn btn-primary w-100">Register</button>
+                    <p id="already-registered-message" class="text-center mt-3 text-warning" style="display: none;">You are already registered!</p>
+                </form>
+            </div>
+        </section>
+
+        <!-- Participant List -->
+        <section class="participant-list card">
+            <div class="card-body">
+                <h2 class="card-title text-center">Registered Participants</h2>
+                <ul id="participant-list" class="list-group">
+                    <!-- Participants will be dynamically added here -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- Tournament Bracket -->
+        <section class="tournament-bracket">
+            <h2 class="text-center">Tournament Bracket</h2>
+            <div id="bracket" class="bg-light p-4 rounded">
+                <p class="text-center">Bracket will be displayed here once registration closes.</p>
+            </div>
+        </section>
     </div>
 
+    <!-- Snowflake Animation -->
     <script>
-        // Генерація зірок
-        const starsContainer = document.querySelector('.stars');
-        const numStars = 100;
+        const createSnowflake = () => {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = '❄️';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            snowflake.style.animationDuration = Math.random() * 5 + 5 + 's';
 
-        function randomColor() {
-            // Генерація випадкового кольору для зірок (світліший або темніший)
-            const baseColors = ['#9b59b6', '#8e44ad', '#bb8fce', '#af7ac5', '#a569bd']; 
-            return baseColors[Math.floor(Math.random() * baseColors.length)];
-        }
+            document.body.appendChild(snowflake);
 
-        for (let i = 0; i < numStars; i++) {
-            const star = document.createElement('div');
-            star.classList.add('star');
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * window.innerHeight;
-            const delay = Math.random() * 2;
-            const duration = 2 + Math.random() * 3;
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000);
+        };
 
-            star.style.left = `${x}px`;
-            star.style.top = `${y}px`;
-            star.style.animationDelay = `${delay}s`;
-            star.style.animationDuration = `${duration}s`;
-            star.style.backgroundColor = randomColor();  // Задаємо випадковий колір
+        setInterval(createSnowflake, 200);
 
-            starsContainer.appendChild(star);
-        }
+        // Load participants from localStorage on page load
+        window.onload = function() {
+            const participants = JSON.parse(localStorage.getItem('participants')) || [];
+            const participantList = document.getElementById('participant-list');
+            participantList.innerHTML = '';
 
-        const text = document.getElementById('main-text');
-        const buttonsContainer = document.getElementById('buttons-container');
+            if (participants.length === 0) {
+                participantList.innerHTML = '<li class="list-group-item text-center">No participants yet.</li>';
+            } else {
+                participants.forEach(participant => {
+                    const participantItem = document.createElement('li');
+                    participantItem.classList.add('list-group-item', 'text-center');
+                    participantItem.textContent = `${participant.nickname} - ${participant.game === 'cs2' ? 'Counter-Strike 2' : 'Dota 2'}`;
+                    participantList.appendChild(participantItem);
+                });
+            }
+        };
 
-        // Анімація тексту
-        setTimeout(() => {
-            text.style.opacity = '1';
-        }, 1000);
+        // Handle form submission
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form from submitting and page from refreshing
 
-        // Показ кнопок після завершення анімації підйому тексту
-        setTimeout(() => {
-            buttonsContainer.style.opacity = '1';
-            buttonsContainer.style.visibility = 'visible';
-        }, 5000); // Відкласти показ кнопок після завершення анімації підйому
+            const nickname = document.getElementById('nickname').value;
+            const game = document.getElementById('game').value;
+
+            // Check if the user has already registered
+            const participants = JSON.parse(localStorage.getItem('participants')) || [];
+            if (participants.some(participant => participant.nickname === nickname)) {
+                document.getElementById('already-registered-message').style.display = 'block';
+                return; // Stop further processing
+            }
+
+            // Add new participant to the array
+            participants.push({ nickname, game });
+
+            // Save updated participants array to localStorage
+            localStorage.setItem('participants', JSON.stringify(participants));
+
+            // Create a new list item for the participant
+            const participantItem = document.createElement('li');
+            participantItem.classList.add('list-group-item', 'text-center');
+            participantItem.textContent = `${nickname} - ${game === 'cs2' ? 'Counter-Strike 2' : 'Dota 2'}`;
+
+            // Append the new participant to the list
+            const participantList = document.getElementById('participant-list');
+            // Remove placeholder text if exists
+            if (participantList.firstChild.textContent === 'No participants yet.') {
+                participantList.firstChild.remove();
+            }
+            participantList.appendChild(participantItem);
+
+            // Disable the form fields and button to prevent re-registration
+            document.getElementById('nickname').disabled = true;
+            document.getElementById('game').disabled = true;
+            document.getElementById('register-btn').disabled = true;
+        });
     </script>
 </body>
 </html>
