@@ -93,7 +93,7 @@
 
         .buttons {
             position: absolute;
-            bottom: 20%;
+            bottom: 10%;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -104,8 +104,8 @@
         }
 
         .btn {
-            padding: 15px 30px;
-            font-size: 1.6rem;
+            padding: 12px 25px;
+            font-size: 1.2rem;
             color: white;
             background: linear-gradient(45deg, #6200ea, #b19cd9);
             border: none;
@@ -120,6 +120,22 @@
             background: linear-gradient(45deg, #b19cd9, #6a0dad);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
             filter: brightness(1.2);
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #bb8fce;
         }
     </style>
 </head>
@@ -174,10 +190,9 @@
 
         // Event listeners for buttons
         document.getElementById('free-btn').addEventListener('click', function() {
-            // Open the free.html page in a new tab
-            const newWindow = window.open('free.html', '_blank');
+            // Open the free page in a new tab
+            const newWindow = window.open('', '_blank');
             
-            // Add a back button in free.html
             newWindow.document.write(`
                 <html>
                     <head>
@@ -188,6 +203,7 @@
                                 color: white;
                                 font-family: 'Poppins', sans-serif;
                                 text-align: center;
+                                margin: 0;
                             }
                             #back-button {
                                 position: absolute;
@@ -207,7 +223,7 @@
                     </head>
                     <body>
                         <button id="back-button" onclick="window.close()">Back</button>
-                        <div style="margin-top: 50px; font-size: 3rem;">NEMA FREE BLYAT</div>
+                        <div style="font-size: 3rem; margin-top: 50px;">NEMA FREE BLYAT</div>
                     </body>
                 </html>
             `);
