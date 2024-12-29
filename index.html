@@ -59,7 +59,7 @@
 
         .text {
             position: absolute;
-            top: 50%;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
             color: #a079c7;
@@ -93,9 +93,9 @@
 
         .buttons {
             position: absolute;
-            top: 50%;
+            bottom: 20%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
             display: flex;
             gap: 40px;
             opacity: 0;
@@ -109,16 +109,17 @@
             color: white;
             background: linear-gradient(45deg, #6200ea, #b19cd9);
             border: none;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, background 0.5s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, background 0.5s ease, box-shadow 0.3s ease, filter 0.3s ease;
         }
 
         .btn:hover {
             transform: scale(1.1);
             background: linear-gradient(45deg, #b19cd9, #6a0dad);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            filter: brightness(1.2);
         }
     </style>
 </head>
