@@ -55,7 +55,7 @@
             font-size: 4rem;
             text-shadow: 0 0 10px #a079c7, 0 0 20px #a079c7;
             opacity: 0;
-            animation: fadeIn 1s ease-out forwards, moveUp 3s ease-out 4s forwards;
+            animation: fadeIn 1s ease-out forwards, moveUp 3s ease-out 1s forwards; /* Плавне підняття з відтермінуванням */
         }
 
         @keyframes fadeIn {
@@ -153,12 +153,11 @@
             text.style.opacity = '1';
         }, 1000);
 
+        // Показ кнопок після завершення анімації підйому тексту
         setTimeout(() => {
-            text.style.transform = 'translate(-50%, -100%)';
             buttonsContainer.style.opacity = '1';
             buttonsContainer.style.visibility = 'visible';
-            buttonsContainer.style.transform = 'translate(-50%, -60%)';
-        }, 4000);
+        }, 5000); // Відкласти показ кнопок після завершення анімації підйому
     </script>
 </body>
 </html>
