@@ -26,24 +26,24 @@
         /* Star styles */
         .star {
             position: absolute;
-            width: 5px; /* Increased size */
-            height: 5px; /* Increased size */
-            background: rgba(128, 0, 128, 1); /* Full opacity */
+            width: 5px;
+            height: 5px;
+            background: rgba(128, 0, 128, 1);
             border-radius: 50%;
             animation: twinkle 2s infinite ease-in-out, fall 10s infinite linear;
-            box-shadow: 0 0 10px rgba(128, 0, 128, 0.8); /* Added glow effect */
+            box-shadow: 0 0 10px rgba(128, 0, 128, 0.8);
         }
 
         /* Twinkle effect */
         @keyframes twinkle {
             0%, 100% {
-                opacity: 0.5; /* Increased opacity */
+                opacity: 0.5;
                 transform: scale(1);
             }
 
             50% {
                 opacity: 1;
-                transform: scale(1.3); /* Slightly larger scale */
+                transform: scale(1.3);
             }
         }
 
@@ -97,15 +97,15 @@
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 40px;
+            gap: 20px;
             opacity: 0;
             visibility: hidden;
             transition: opacity 1s ease, visibility 1s ease;
         }
 
         .btn {
-            padding: 20px 40px;
-            font-size: 2rem;
+            padding: 15px 30px;
+            font-size: 1.6rem;
             color: white;
             background: linear-gradient(45deg, #6200ea, #b19cd9);
             border: none;
@@ -127,8 +127,8 @@
     <div class="stars"></div>
     <div class="text" id="main-text">Violetrix</div>
     <div class="buttons" id="buttons-container">
-        <button class="btn">Free</button>
-        <button class="btn">Lifetime</button>
+        <button class="btn" id="free-btn">Free</button>
+        <button class="btn" id="lifetime-btn">Lifetime</button>
     </div>
 
     <script>
@@ -153,7 +153,7 @@
             star.style.top = `${y}px`;
             star.style.animationDelay = `${delay}s`;
             star.style.animationDuration = `${duration}s`;
-            star.style.backgroundColor = randomColor();  // Set random color for the star
+            star.style.backgroundColor = randomColor();
 
             starsContainer.appendChild(star);
         }
@@ -170,10 +170,10 @@
         setTimeout(() => {
             buttonsContainer.style.opacity = '1';
             buttonsContainer.style.visibility = 'visible';
-        }, 4000); // Buttons appear after 4 seconds (text animation completes)
-        
+        }, 4000); // Buttons appear after 4 seconds
+
         // Event listeners for buttons
-        document.querySelector('.btn:nth-child(1)').addEventListener('click', function() {
+        document.getElementById('free-btn').addEventListener('click', function() {
             // Open the free.html page in a new tab
             const newWindow = window.open('free.html', '_blank');
             
@@ -213,7 +213,7 @@
             `);
         });
 
-        document.querySelector('.btn:nth-child(2)').addEventListener('click', function() {
+        document.getElementById('lifetime-btn').addEventListener('click', function() {
             alert('Lifetime option clicked!');
         });
     </script>
