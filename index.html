@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Violetrix</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background: black;
+        }
+
+        /* Фон зі зірками */
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(128, 0, 128, 0.8); /* Початковий колір */
+            border-radius: 50%;
+            animation: twinkle 2s infinite ease-in-out;
+        }
+
+        /* Анімація для зірок */
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Зменшення сяяння тексту */
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #a079c7;
+            font-size: 4rem;
+            text-shadow: 0 0 10px #a079c7, 0 0 20px #a079c7;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards, moveUp 3s ease-out 4s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        @keyframes moveUp {
+            to {
+                transform: translate(-50%, -60%);
+            }
+        }
+
+        /* Стилі для кнопок */
+        .buttons {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            display: flex;
+            gap: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.4rem;
+            color: white;
+            background: linear-gradient(45deg, #6200ea, #b19cd9);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background 0.5s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #b19cd9, #6a0dad);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="text" id="main-text">Violetrix</div>
+    <div class="buttons" id="buttons-container">
+        <button class="btn">Test 1</button>
+        <button class="btn">Test 2</button>
+        <button class="btn">Test 3</button>
+        <button class="btn">Test 4</button>
+    </div>
+
+    <script>
+        // Генерація зірок
+        const starsContainer = document.querySelector('.stars');
+        const numStars = 100;
+
+        function randomColor() {
+            // Генерація випадкового кольору для зірок (світліший або темніший)
+            const baseColors = ['#9b59b6', '#8e44ad', '#bb8fce', '#af7ac5', '#a569bd']; 
+            return baseColors[Math.floor(Math.random() * baseColors.length)];
+        }
+
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            const delay = Math.random() * 2;
+            const duration = 2 + Math.random() * 3;
+
+            star.style.left = `${x}px`;
+            star.style.top = `${y}px`;
+            star.style.animationDelay = `${delay}s`;
+            star.style.animationDuration = `${duration}s`;
+            star.style.backgroundColor = randomColor();  // Задаємо випадковий колір
+
+            starsContainer.appendChild(star);
+        }
+
+        const text = document.getElementById('main-text');
+        const buttonsContainer = document.getElementById('buttons-container');
+
+        // Анімація тексту
+        setTimeout(() => {
+            text.style.opacity = '1';
+        }, 1000);
+
+        setTimeout(() => {
+            text.style.transform = 'translate(-50%, -100%)';
+            buttonsContainer.style.opacity = '1';
+            buttonsContainer.style.visibility = 'visible';
+            buttonsContainer.style.transform = 'translate(-50%, -60%)';
+        }, 4000);
+    </script>
+</body>
+</html>
